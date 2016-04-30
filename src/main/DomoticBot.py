@@ -4,30 +4,34 @@ from commands.Start import Start
 from commands.Stop import Stop
 from commands.Help import Help
 from commands.Temp import Temp
+from commands.Echo import Echo
 from commands.Doorbell import Doorbell
-from nodebase.DomoticNodes import DomoticNodes
-from nodebase.NodePresence import NodePresence
-from nodebase.NodeDoorbell import NodeDoorbell
-from nodebase.NodeClimatization import NodeClimatization
-from nodebase.NodeDoorlock import NodeDoorlock
-from nodebase.Buzzer import Buzzer
+#from nodebase.DomoticNodes import DomoticNodes
+#from nodebase.NodePresence import NodePresence
+#from nodebase.NodeDoorbell import NodeDoorbell
+#from nodebase.NodeClimatization import NodeClimatization
+#from nodebase.NodeDoorlock import NodeDoorlock
+#from nodebase.Buzzer import Buzzer
 from commands.Notify import Notify
 
 class DomoticBot:
     def __init__(self):
         self.users = []
-        BOT_TOKEN = '129516182:AAFtuM-28DjMPzVHRL0RUzHYPNVZSNpqp8M'
+        BOT_TOKEN = '189752430:AAF45NDGJboBXNzqGozBetr0YLrEWE1avsU'
         self.bot = telepot.Bot(BOT_TOKEN)
-        self.domoticNodes = self.__configureDomoticNodes()
+        #self.domoticNodes = self.__configureDomoticNodes()
         self.handlers = [
             Start(self.bot, self.users),
             Stop(self.bot, self.users),
-            Help(self.bot),
-            Doorbell(self.bot,self.domoticNodes),
-            Notify(self.bot,self.domoticNodes),
-            Temp(self.bot,self.domoticNodes)
-            ]
-        self.bot.notifyOnMessage(self.handle_message)
+            Echo(self.bot, self.users)
+        ]
+        #    Help(self.bot),
+        #    Doorbell(self.bot,self.domoticNodes),
+        #    Notify(self.bot,self.domoticNodes),
+        #    Temp(self.bot,self.domoticNodes)
+        #    ]
+        #self.bot.notifyOnMessage(self.handle_message)
+        self.bot.message_loop(self.handle_message)
 
 
     def __configureDomoticNodes(self):
@@ -56,8 +60,8 @@ class DomoticBot:
 def main():
     domotic_bot = DomoticBot()
     while 1:
-        domotic_bot.update()
-	print "updating the node"
+    #    domotic_bot.update()
+	#print "updating the node"
         time.sleep(10)
 
 if __name__ == '__main__':

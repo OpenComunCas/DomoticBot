@@ -24,4 +24,5 @@ class Help:
             print the_help
             userId = message['from']['id']
             self.bot.sendMessage(userId, the_help)
+            """
 
